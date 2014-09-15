@@ -1,6 +1,6 @@
 	OnExit, ExitSub
 #include %A_ScriptDir%\libs\CrouchToggle.ahk
-#include Config.ahk
+#include %A_ScriptDir%\libs\Config.ahk
 
 ;Some stuff that is suggested to use, dont know why tbh 
 #NoEnv
@@ -16,25 +16,77 @@ SetTitleMatchMode 1
 SetTimer, CheckWindow, 500
 
 ;Init
-Init_CrouchToggle(CROUCH_KEY_INGAME)
+TEMP := GetKey( "crouch_ingame" )
+Init_CrouchToggle( TEMP )
 
-Hotkey, ~*%CROUCH_KEY%, CrouchKey
-Hotkey, ~*%PRONE_KEY%, Uncrouch
-Hotkey, ~*%CONSOLE_KEY%, Uncrouch
-Hotkey, ~*%ENTER_KEY%, Uncrouch
-Hotkey, ~*%POS1_KEY%, Uncrouch
-Hotkey, ~*%POS2_KEY%, Uncrouch
-Hotkey, ~*%POS3_KEY%, Uncrouch
-Hotkey, ~*%POS4_KEY%, Uncrouch
-Hotkey, ~*%POS5_KEY%, Uncrouch
-Hotkey, ~*%POS6_KEY%, Uncrouch
-Hotkey, ~*%POS7_KEY%, Uncrouch
-Hotkey, ~*%POS8_KEY%, Uncrouch
-Hotkey, ~*%JUMP_KEY%, Uncrouch
-Hotkey, ~*%SQUAD_CHAT_KEY%, ChatKey
-Hotkey, ~*%TEAM_CHAT_KEY%, ChatKey
-Hotkey, ~*%ALL_CHAT_KEY%, ChatKey
-Hotkey, *%SPRINT_KEY%, SprintKey
+
+TEMP := GetKey("crouch")
+if TEMP != none
+	Hotkey, ~*%TEMP%, CrouchKey
+
+TEMP := GetKey("prone")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("jump")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("enter")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("pos1")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("pos2")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("pos3")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("pos4")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("pos5")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("pos6")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("pos7")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("pos8")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("console")
+if TEMP != none
+	Hotkey, ~*%TEMP%, Uncrouch
+
+TEMP := GetKey("squad")
+if TEMP != none
+	Hotkey, ~*%TEMP%, ChatKey
+
+TEMP := GetKey("team")
+if TEMP != none
+	Hotkey, ~*%TEMP%, ChatKey
+
+TEMP := GetKey("all")
+if TEMP != none
+	Hotkey, ~*%TEMP%, ChatKey
+
+TEMP := GetKey("sprint")
+if TEMP != none
+	Hotkey, *%TEMP%, SprintKey
 
 ;Start as suspended
 SuspendScript()
@@ -44,13 +96,14 @@ Return
 
 ;Check to see if PR window is active
 CheckWindow:
-	WinWaitActive, %PRWIN_TITLE%, ,
+	_TEMP := GetTitle()
+	WinWaitActive, %_TEMP%, ,
 		if ErrorLevel = 0
 		{
 			Suspend, off
 		}
 
-	WinWaitNotActive, %PRWIN_TITLE%, ,
+	WinWaitNotActive, %_TEMP%, ,
 		if ErrorLevel = 0
 		{
 			SuspendScript()
@@ -66,9 +119,11 @@ CrouchKey:
 		if(GetChatting() = 1)
 			Return
 			
-		SendInput {%CROUCH_KEY_INGAME% down}
+		_TEMP := GetKey("crouch_ingame")
+		SendInput {%_TEMP% down}
 
-		KeyWait, %CROUCH_KEY%
+		_TEMP := GetKey("crouch")
+		KeyWait, %_TEMP%
 		ToggleCrouch()
 Return
                     
@@ -97,13 +152,15 @@ Return
 
 SprintKey:		
 	SetCrouch(0)
-	SendInput {%SPRINT_KEY% up}   
+	
+	_TEMP := GetKey("sprint")
+	SendInput {%_TEMP% up}   
 
 	Sleep 30
 
-	SendInput {%SPRINT_KEY% Down}
-	KeyWait %SPRINT_KEY% 
-	SendInput {%SPRINT_KEY% Up} 
+	SendInput {%_TEMP% Down}
+	KeyWait %_TEMP% 
+	SendInput {%_TEMP% Up} 
 Return
 
 SuspendScript()

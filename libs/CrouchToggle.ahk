@@ -67,9 +67,3 @@ SetChatting(b)
 			setCrouch(1, 1)
 		}
 }
-
-GetKey()
-{
-	Global key
-	return key
-}
