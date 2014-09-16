@@ -8,6 +8,8 @@ Remember to run the script as **Administrator** on Windows 7 and up.
 
 config.ini
 ----------
+You can find all keynames [here](http://www.autohotkey.com/docs/KeyList.htm).  
+
 Key | Description
 ----|------------
 CROUCH|Key you want to use to crouch (**NOT** same as in PR)
