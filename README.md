@@ -18,6 +18,6 @@ SPRINT|Key to sprint
 SQUAD_CHAT|Key to open squad chat
 TEAM_CHAT|Key to open team chat
 ALL_CHAT|Key to open all chat
-CONSOLE|Key tp open console
+CONSOLE|Key to open console
 ENTER|Key to enter vehicles
 POSx|Key to switch to seat X
