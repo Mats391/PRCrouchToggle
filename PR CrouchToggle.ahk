@@ -88,6 +88,9 @@ TEMP := GetKey("sprint")
 if TEMP != none
 	Hotkey, *%TEMP%, SprintKey
 
+;clear TEMP
+TEMP := ""
+	
 ;Start as suspended
 SuspendScript()
 Return
@@ -96,14 +99,14 @@ Return
 
 ;Check to see if PR window is active
 CheckWindow:
-	_TEMP := GetTitle()
-	WinWaitActive, %_TEMP%, ,
+	_temp := GetTitle()
+	WinWaitActive, %_temp%, ,
 		if ErrorLevel = 0
 		{
 			Suspend, off
 		}
 
-	WinWaitNotActive, %_TEMP%, ,
+	WinWaitNotActive, %_temp%, ,
 		if ErrorLevel = 0
 		{
 			SuspendScript()
@@ -119,11 +122,11 @@ CrouchKey:
 		if(GetChatting() = 1)
 			Return
 			
-		_TEMP := GetKey("crouch_ingame")
-		SendInput {%_TEMP% down}
+		_temp := GetKey("crouch_ingame")
+		SendInput {%_temp% down}
 
-		_TEMP := GetKey("crouch")
-		KeyWait, %_TEMP%
+		_temp := GetKey("crouch")
+		KeyWait, %_temp%
 		ToggleCrouch()
 Return
                     
@@ -153,14 +156,14 @@ Return
 SprintKey:		
 	SetCrouch(0)
 	
-	_TEMP := GetKey("sprint")
-	SendInput {%_TEMP% up}   
+	_temp := GetKey("sprint")
+	SendInput {%_temp% up}   
 
 	Sleep 30
 
-	SendInput {%_TEMP% Down}
-	KeyWait %_TEMP% 
-	SendInput {%_TEMP% Up} 
+	SendInput {%_temp% Down}
+	KeyWait %_temp% 
+	SendInput {%_temp% Up} 
 Return
 
 SuspendScript()
