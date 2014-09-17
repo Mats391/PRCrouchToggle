@@ -1,42 +1,42 @@
 ﻿Init_CrouchToggle(pKey)
 {
-	Global key, toggle, chatting, crouchBefore
-	toggle			:= 0
-	chatting 		:= 0
-	crouchBefore 	:= 0
-	key := pKey
+	Global g_key, g_toggle, g_chatting, g_crouchBefore
+	g_toggle			:= 0
+	g_chatting 		:= 0
+	g_crouchBefore 	:= 0
+	g_key := pKey
 }
 
 
 ResetCrouch()
 {
-	Global toggle, crouchBefore, chatting, key
-	SendInput {%key% up}
-	toggle			:= 0
+	Global g_toggle, g_crouchBefore, g_chatting, g_key
+	SendInput {%g_key% up}
+	g_toggle			:= 0
 }
 
 SetCrouch(b, sendAgain := 0)
 {
-	Global toggle, crouchBefore, key
-	toggle := b
+	Global g_toggle, g_crouchBefore, g_key
+	g_toggle := b
 	
-	if toggle = 0
+	if g_toggle = 0
 	{	
-		if chatting = 1
-			crouchBefore := 1
-		SendInput {%key% up}
+		if g_chatting = 1
+			g_crouchBefore := 1
+		SendInput {%g_key% up}
 	}
 	else
 	{
 		if sendAgain = 1
-			SendInput {%key% down}
+			SendInput {%g_key% down}
 	}
 }
 
 ToggleCrouch()
 {
-	Global toggle
-	if toggle = 1
+	Global g_toggle
+	if g_toggle = 1
 		SetCrouch(0)
 	else
 		SetCrouch(1)
@@ -44,26 +44,26 @@ ToggleCrouch()
 
 GetChatting()
 {
-	Global chatting
-	Return chatting
+	Global g_chatting
+	Return g_chatting
 }
 
 SetChatting(b)
 {
-	Global chatting, crouchBefore, toggle
-	chatting := b
+	Global g_chatting, g_crouchBefore, g_toggle
+	g_chatting := b
 	
-	if chatting = 1
+	if g_chatting = 1
 	{
-		if toggle = 1
-			crouchBefore := 1
+		if g_toggle = 1
+			g_crouchBefore := 1
 		SetCrouch(0)
 	}
 	else
-		if crouchBefore = 1
+		if g_crouchBefore = 1
 		{
 			Sleep 200
-			crouchBefore := 0
+			g_crouchBefore := 0
 			setCrouch(1, 1)
 		}
 }
